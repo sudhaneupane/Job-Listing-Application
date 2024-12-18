@@ -21,7 +21,7 @@ const Nav = () => {
         <div className="flex items-center space-x-4">
           <Link href="/signup">
             <button className="px-4 py-1.5 text-[14px] sm:text-[16px] sm:px-6 sm:py-2 bg-blue-500 font-semibold text-white rounded-lg hover:bg-blue-800 transition-all duration-300">
-              Sign up
+              Sign Up
             </button>
           </Link>
         </div>
