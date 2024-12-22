@@ -1,7 +1,8 @@
 "use client";
 import axios from "axios";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 const SignUpPage = () => {
@@ -24,14 +25,14 @@ const SignUpPage = () => {
 
       if (response.status === 201) {
         toast.success(response.data.message);
-      }
 
-      setEmail("");
-      setPassword("");
-      setPhone("");
-      setTimeout(()=>router.push("/login"),2000)
+        setEmail("");
+        setPassword("");
+        setPhone("");
+        setTimeout(() => router.push("/login"), 2000);
+      }
     } catch (error) {
-      console.log("err", error);
+      toast.error(error.response.data.message);
     }
   };
   return (
@@ -83,10 +84,12 @@ const SignUpPage = () => {
             className="w-1/2 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 gap-2"
           >
             Sign Up
-          </button>
-          <button className="w-1/2 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 gap-2">
-            Login
-          </button>
+          </button>{" "}
+          <Link href="/login">
+            <button className="w-full px-12 flex bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 gap-2">
+              Login
+            </button>
+          </Link>
           <ToastContainer />
         </div>
       </form>
