@@ -17,6 +17,18 @@ const jobDetailSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  salary: {
+    type: String,
+    required: true,
+  },
+  requirement: {
+    type: String,
+    required: true,
+  },
+  jobType: {
+    type: String,
+    required: true,
+  },
 });
 
 const Jobs = mongoose.models.Jobs || mongoose.model("Jobs", jobDetailSchema);

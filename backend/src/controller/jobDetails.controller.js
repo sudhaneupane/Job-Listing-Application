@@ -2,9 +2,25 @@ import Jobs from "../models/jobDetails.model.js";
 
 const addJob = async (req, res) => {
   try {
-    const { title, description, company, location } = req.body;
+    const {
+      title,
+      description,
+      company,
+      location,
+      salary,
+      requirement,
+      jobType,
+    } = req.body;
 
-    if (!title || !description || !company || !location) {
+    if (
+      !title ||
+      !description ||
+      !company ||
+      !location ||
+      !salary ||
+      !requirement ||
+      !jobType
+    ) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
@@ -13,6 +29,9 @@ const addJob = async (req, res) => {
       description,
       company,
       location,
+      salary,
+      requirement,
+      jobType,
     });
 
     if (!created) {
