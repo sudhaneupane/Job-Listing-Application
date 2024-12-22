@@ -62,7 +62,7 @@ const Nav = () => {
               alt="Logo"
               width={200}
               height={200}
-              className="w-[100%] h-[98%]"
+              className="w-[90%] h-[98%]"
             />
           </Link>
         </div>
