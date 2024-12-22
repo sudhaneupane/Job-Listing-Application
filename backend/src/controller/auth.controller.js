@@ -19,6 +19,14 @@ const registerUser = async (req, res) => {
       });
     }
 
+    const checkPhoneDup = await Users.findOne({ phone });
+    if (checkPhoneDup) {
+      return res.status(400).json({
+        success: false,
+        message: "Phone number already taken",
+      });
+    }
+
     const hashPassword = await bcrypt.hash(password, 10);
     const createUser = await Users.create({
       email,
@@ -91,6 +99,10 @@ const loginUser = async (req, res) => {
       expiryInfo
     );
 
+    const saveToken = await Users.updateOne({
+      token: gentoken,
+    });
+
     res.status(200).json({
       success: true,
       token: gentoken,
@@ -101,9 +113,24 @@ const loginUser = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
 const logoutUser = async (req, res) => {
   try {
-  } catch (error) {}
+    const id = req.user.id;
+    console.log(id);
+    const findUserDetail = await Users.findById({ _id: id });
+    if (!findUserDetail) {
+      res.status(400).json({ success: false, message: "ID cannot be found" });
+    }
+    await Users.updateOne({ token: null });
+    return res.status(200).json({ success: true, message: "Logged Out" });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
 };
 // const registerUser = async (req, res) => {
 //   try {
