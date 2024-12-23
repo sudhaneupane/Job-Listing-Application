@@ -38,8 +38,8 @@ const JobCategory = () => {
           {job.slice(0, 4).map((job, index) => {
             return (
               <Link
-                href={`/job/jobdetails/${job.jobId}`}
-                key={job.jobId || index}
+                href={`/job/jobdetails/${job._id}`}
+                key={job._id || index}
               >
                 {/* jobcard */}
                 <div className="p-4 mb-6 relative border-2 cursor-pointer hover:scale-110 hover:shadow-md transition-all duration-300 border-blue-700 rounded-lg border-opacity-10">
