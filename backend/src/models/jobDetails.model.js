@@ -25,6 +25,10 @@ const jobDetailSchema = new mongoose.Schema({
     type: [String],
     required: true,
   },
+  responsibilities: {
+    type: [String],
+    required: true,
+  },
   jobType: {
     type: String,
     required: true,

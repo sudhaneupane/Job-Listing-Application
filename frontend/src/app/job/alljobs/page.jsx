@@ -2,24 +2,35 @@
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { pics } from "../../../../public/data";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { BiMoney } from "react-icons/bi";
+import Image from "next/image";
 
 const page = () => {
   const [job, setJob] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
-  const allJobs = async () => {
+  const allJobs = async (page = 1) => {
     try {
-      const response = await axios.get(`http://localhost:8000/api/jobs`);
+      const response = await axios.get(`http://localhost:8000/api/jobs`, {
+        params: { page, limit: 5 },
+      });
       setJob(response.data.viewJobs);
+      setTotalPages(response.data.totalPages);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    allJobs();
-  }, []);
+    allJobs(currentPage);
+  }, [currentPage]);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   return (
     <div className="mt-12 w-[80%] mx-auto mb-12">
@@ -32,7 +43,7 @@ const page = () => {
             <Link href={`/job/jobdetails/${job._id}`} key={job._id || index}>
               <div className="p-4 mb-6 relative border-2 cursor-pointer hover:scale-110 hover:shadow-md transition-all duration-300 border-blue-700 rounded-lg border-opacity-10">
                 <div className="flex items-center space-x-6">
-                 <img src={job.image} width={50} height={50} />
+                  <img src={job.image} height={50} width={50} alt="" />
                   <div className="ml-4">
                     <h1 className="text-[17px] font-semibold mb-[0.4rem]">
                       {job.title}
@@ -70,6 +81,22 @@ const page = () => {
             </Link>
           );
         })}
+      </div>
+
+      <div className="flex justify-center mt-6 space-x-4">
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index}
+            onClick={() => handlePageChange(index + 1)}
+            className={`px-4 py-2 rounded-md ${
+              currentPage === index + 1
+                ? "bg-blue-700 text-white"
+                : "bg-gray-200 text-black"
+            }`}
+          >
+            {index + 1}
+          </button>
+        ))}
       </div>
     </div>
   );

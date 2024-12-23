@@ -12,6 +12,7 @@ const addJob = async (req, res) => {
       requirement,
       jobType,
       skills,
+      responsibilities,
     } = req.body;
 
     if (
@@ -22,7 +23,8 @@ const addJob = async (req, res) => {
       !salary ||
       !requirement ||
       !jobType ||
-      !skills
+      !skills ||
+      !responsibilities
     ) {
       return res.status(400).json({ message: "All fields are required" });
     }
@@ -32,7 +34,7 @@ const addJob = async (req, res) => {
     }
 
     const imageUrl = await cloudinary.uploader.upload(req.file.path, {
-      resource_type:"image"
+      resource_type: "image",
     });
 
     const created = await Jobs.create({
@@ -44,6 +46,7 @@ const addJob = async (req, res) => {
       requirement,
       jobType,
       skills,
+      responsibilities,
       image: imageUrl.secure_url,
     });
 
@@ -65,17 +68,33 @@ const addJob = async (req, res) => {
 
 const viewJob = async (req, res) => {
   try {
-    const viewJobs = await Jobs.find({});
+    const { page = 1, limit = 5 } = req.query;
+    const offset = (page - 1) * parseInt(limit, 10);
+
+    const viewJobs = await Jobs.find().skip(offset).limit(parseInt(limit, 10));
+
     if (viewJobs.length === 0) {
       return res
-        .status(400)
+        .status(404)
         .json({ message: "There are no jobs at the moment" });
     }
-    res.status(201).json({ success: true, viewJobs });
+
+    const totalCount = await Jobs.countDocuments();
+
+    const totalPages = Math.ceil(totalCount / limit);
+
+    res.status(200).json({
+      success: true,
+      currentPage: parseInt(page, 10),
+      totalPages,
+      totalCount,
+      viewJobs,
+    });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Error fetching jobs", error: error.message });
+    res.status(500).json({
+      message: "Error fetching jobs",
+      error: error.message,
+    });
   }
 };
 

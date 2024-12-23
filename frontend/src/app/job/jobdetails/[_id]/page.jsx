@@ -27,11 +27,11 @@ const JobDetails = ({ params }) => {
         <div className="flex-[0.7] ">
           <div className="flex justify-between items-center w-full space-x-8">
             <img
-              src={job ? job.image : "/default-image.jpg"} 
+              src={job ? job.image : "/default-image.jpg"}
               alt="Job"
               className="w-16 h-16 object-cover rounded-lg"
             />
-            
+
             <h1 className="text-[30px] font-extrabold text-blue-600">
               {job ? job.title : "Loading..."}
             </h1>
@@ -50,7 +50,11 @@ const JobDetails = ({ params }) => {
               Key Responsibilities
             </h1>
             <p className="mt-4 text-black text-opacity-70">
-              {job ? job.description : "Loading.."}
+              {job ? job.responsibilities : "Loading.."}
+            </p>
+            <h1 className="text-[20px] mt-8 font-semibold">Company</h1>
+            <p className="mt-4 text-black text-opacity-70">
+              {job ? job.company : "Loading.."}
             </p>
             <h1 className="text-[20px] mt-8 font-semibold">Skills</h1>
             <ul className=" list-disc mt-4">

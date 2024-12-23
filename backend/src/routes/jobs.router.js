@@ -16,7 +16,7 @@ router.route("/").post(
   addJob
 );
 router.route("/:id").delete(deleteJob);
-router.route("/:id").patch(editJob);
+router.route("/:id").patch(upload.single("image"),editJob);
 router.route("/:id").get(viewSpecificJob);
 
 export default router;

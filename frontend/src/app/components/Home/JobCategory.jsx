@@ -44,12 +44,7 @@ const JobCategory = () => {
                 {/* jobcard */}
                 <div className="p-4 mb-6 relative border-2 cursor-pointer hover:scale-110 hover:shadow-md transition-all duration-300 border-blue-700 rounded-lg border-opacity-10">
                   <div className="flex items-center space-x-6">
-                    <Image
-                      src={pics.jobimg}
-                      alt={job.title}
-                      width={50}
-                      height={50}
-                    />
+                    <img src={job.image} height={50} width={50} alt="" />
                     <div className="ml-4">
                       <h1 className="text-[17px] font-semibold mb-[0.4rem]">
                         {job.title}
