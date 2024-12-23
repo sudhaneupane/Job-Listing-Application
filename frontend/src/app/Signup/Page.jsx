@@ -2,17 +2,62 @@
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 const SignUpPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
+  const [formErrors, setFormErrors] = useState({});
+
   const router = useRouter();
+
+  const validateForm = () => {
+    let formErrors = {};
+    const allowedDomains = [
+      "gmail.com",
+      "outlook.com",
+      "hotmail.com",
+      "yahoo.com",
+      "icloud.com",
+      "me.com",
+      "mac.com",
+    ];
+
+    if (!email) {
+      formErrors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      formErrors.email = "Email address is invalid";
+    } else {
+      const emailDomain = email.split("@")[1]?.toLowerCase();
+      if (!allowedDomains.includes(emailDomain)) {
+        formErrors.email =
+          "Email must be from Gmail, Outlook, Hotmail, Yahoo, iCloud, or Apple domains.";
+      }
+    }
+    if (!password) {
+      formErrors.password = "Password is required";
+    } else if (!/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(password)) {
+      formErrors.password =
+        "Password must contain at least 6 characters, including upper and lower case letters, and at least one number.";
+    }
+
+    if (!phone) {
+      formErrors.phone = "Phone number is required";
+    } else if (!/^(97|98)\d{8}$/.test(phone)) {
+      formErrors.phone =
+        "Phone number must be exactly 10 digits and start with 97 or 98";
+    }
+    setFormErrors(formErrors);
+    return Object.keys(formErrors).length === 0;
+  };
 
   const handleSignUpForm = async (e) => {
     e.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
     try {
       const formData = { email, password, phone };
 
@@ -52,8 +97,15 @@ const SignUpPage = () => {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className={`px-4 py-2 border ${
+              formErrors.email
+                ? "border-red-500 rounded-lg"
+                : "border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            }`}
           />
+          {formErrors.email && (
+            <span className="text-sm text-red-500">{formErrors.email}</span>
+          )}
         </div>
 
         <div className="flex flex-col space-y-2">
@@ -63,8 +115,15 @@ const SignUpPage = () => {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className={`px-4 py-2 border ${
+              formErrors.password
+                ? "border-red-500 rounded-lg"
+                : "border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            }`}
           />
+          {formErrors.password && (
+            <span className="text-sm text-red-500">{formErrors.password}</span>
+          )}
         </div>
 
         <div className="flex flex-col space-y-2">
@@ -74,8 +133,15 @@ const SignUpPage = () => {
             id="phone"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className={`px-4 py-2 border ${
+              formErrors.phone
+                ? "border-red-500 rounded-lg"
+                : " border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            }`}
           />
+          {formErrors.phone && (
+            <span className="text-sm text-red-500">{formErrors.phone}</span>
+          )}
         </div>
 
         <div className="flex space-x-4">

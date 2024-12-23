@@ -117,7 +117,6 @@ const loginUser = async (req, res) => {
 const logoutUser = async (req, res) => {
   try {
     const id = req.user.id;
-    console.log(id);
     const findUserDetail = await Users.findById({ _id: id });
     if (!findUserDetail) {
       res.status(400).json({ success: false, message: "ID cannot be found" });

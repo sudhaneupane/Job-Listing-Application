@@ -36,6 +36,7 @@ const Nav = () => {
         localStorage.removeItem("token");
         toast.success(response.data.message);
         setTimeout(() => router.push("/"));
+        window.location.reload();
       }
     } catch (error) {
       console.log(error);
