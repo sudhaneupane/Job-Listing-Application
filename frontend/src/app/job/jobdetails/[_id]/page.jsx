@@ -46,7 +46,7 @@ const JobDetails = ({ params }) => {
             <p className="mt-4 text-black text-opacity-70">
               {job ? job.description : "Loading.."}
             </p>
-            {/* <h1 className="text-[20px] mt-8 font-semibold">Skills</h1>
+            <h1 className="text-[20px] mt-8 font-semibold">Skills</h1>
             <ul className=" list-disc mt-4">
               {job ? (
                 job.skills.map((skills, index) => (
@@ -57,7 +57,7 @@ const JobDetails = ({ params }) => {
               ) : (
                 <li>Loading...</li>
               )}
-            </ul> */}
+            </ul>
             <h1 className="text-[20px] mt-8 font-semibold">Requirements</h1>
             <ul className=" list-disc mt-4">
               {job ? (

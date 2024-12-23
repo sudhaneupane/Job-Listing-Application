@@ -10,6 +10,7 @@ const addJob = async (req, res) => {
       salary,
       requirement,
       jobType,
+      skills,
     } = req.body;
 
     if (
@@ -19,7 +20,8 @@ const addJob = async (req, res) => {
       !location ||
       !salary ||
       !requirement ||
-      !jobType
+      !jobType ||
+      !skills
     ) {
       return res.status(400).json({ message: "All fields are required" });
     }
@@ -32,6 +34,7 @@ const addJob = async (req, res) => {
       salary,
       requirement,
       jobType,
+      skills,
     });
 
     if (!created) {
