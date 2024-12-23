@@ -22,7 +22,7 @@ const jobDetailSchema = new mongoose.Schema({
     required: true,
   },
   requirement: {
-    type: String,
+    type: [String],
     required: true,
   },
   jobType: {

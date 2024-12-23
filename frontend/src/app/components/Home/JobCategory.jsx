@@ -1,82 +1,27 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { pics } from "../../../../public/data";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { BiMoney } from "react-icons/bi";
+import axios from "axios";
 
 const JobCategory = () => {
-  const dummyjob = [
-    {
-      jobId: "1",
-      title: "Software Engineer",
-      company: "Tech Solutions Inc.",
-      location: "San Francisco, CA",
-      salary: "$100,000 - $120,000",
-      description:
-        "Join our innovative team to develop cutting-edge software solutions.",
-      requirements: [
-        "Bachelor's in Computer Science",
-        "3+ years of software development experience",
-        "Proficiency in JavaScript and Python",
-      ],
-      postedDate: "2024-12-15",
-      jobType: "Full-time",
-      category: "Engineering",
-    },
-    {
-      jobId: "2",
-      title: "Product Manager",
-      company: "Innovate Corp.",
-      location: "New York, NY",
-      salary: "$90,000 - $110,000",
-      description:
-        "Lead product development from concept to execution, ensuring customer satisfaction and business growth.",
-      requirements: [
-        "Bachelor's degree in Business or related field",
-        "Experience in product management",
-        "Strong communication skills",
-      ],
-      postedDate: "2024-12-10",
-      jobType: "Full-time",
-      category: "Product",
-    },
-    {
-      jobId: "3",
-      title: "Digital Marketing Specialist",
-      company: "Brandify",
-      location: "Remote",
-      salary: "$50,000 - $70,000",
-      description:
-        "Help craft and execute digital marketing strategies that drive engagement and increase brand awareness.",
-      requirements: [
-        "Experience with Google Analytics, SEO, and SEM",
-        "Strong writing and analytical skills",
-        "Ability to work independently",
-      ],
-      postedDate: "2024-12-12",
-      jobType: "Full-time",
-      category: "Marketing",
-    },
-    {
-      jobId: "4",
-      title: "Data Analyst",
-      company: "Data Insights LLC",
-      location: "Chicago, IL",
-      salary: "$70,000 - $85,000",
-      description:
-        "Analyze complex datasets to support data-driven decision-making and business strategies.",
-      requirements: [
-        "Bachelor's degree in Data Science, Statistics, or related field",
-        "Experience in data analysis and visualization tools",
-        "Proficient in SQL and Python",
-      ],
-      postedDate: "2024-12-18",
-      jobType: "Full-time",
-      category: "Data Science",
-    },
-  ];
+  const [job, setJob] = useState([]);
+
+  const handleJobs = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8000/api/jobs`);
+      setJob(response.data.viewJobs);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    handleJobs();
+  }, []);
 
   return (
     <div className="pt-18  pb-12 ">
@@ -90,9 +35,12 @@ const JobCategory = () => {
           career!
         </p>
         <div className="mt-12 w-[80%] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {dummyjob.slice(0, 4).map((job) => {
+          {job.slice(0, 4).map((job, index) => {
             return (
-              <Link href={`/job/jobdetails/${job.jobId}`} key={job.jobId}>
+              <Link
+                href={`/job/jobdetails/${job.jobId}`}
+                key={job.jobId || index}
+              >
                 {/* jobcard */}
                 <div className="p-4 mb-6 relative border-2 cursor-pointer hover:scale-110 hover:shadow-md transition-all duration-300 border-blue-700 rounded-lg border-opacity-10">
                   <div className="flex items-center space-x-6">
@@ -124,7 +72,7 @@ const JobCategory = () => {
                       </div>
                       <div className="flex items-center space-x-2 sm:space-x-4 mt-[1rem] flex-wrap">
                         <div className="text-[10px] sm:text-[14px] text-black text-opacity-80 px-3 py-1 rounded-full bg-opacity-30 font-semibold capitalize bg-green-400">
-                          {job.jobType}
+                          Full Time
                         </div>
                         <div className="text-[10px] sm:text-[14px] text-black text-opacity-80 px-3 py-1 rounded-full bg-opacity-30 font-semibold capitalize bg-blue-400">
                           Private
