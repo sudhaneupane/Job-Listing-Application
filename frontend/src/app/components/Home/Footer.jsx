@@ -11,7 +11,7 @@ const Footer = () => {
             Indeed
           </h1>
           <p className="text-[14px] text-white text-opacity-70">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.{" "}
+            Empowering careers and building a better workforce.{" "}
           </p>
           <div className="mt-[1.5rem] flex items-center space-x-3">
             <div className="w-[2.4rem] h-[2.4rem] bg-blue-600 rounded-full flex items-center justify-center">
