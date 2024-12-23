@@ -2,10 +2,8 @@
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { pics } from "../../../../public/data";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { BiMoney } from "react-icons/bi";
-import Image from "next/image";
 
 const page = () => {
   const [job, setJob] = useState([]);
@@ -34,12 +32,7 @@ const page = () => {
             <Link href={`/job/jobdetails/${job._id}`} key={job._id || index}>
               <div className="p-4 mb-6 relative border-2 cursor-pointer hover:scale-110 hover:shadow-md transition-all duration-300 border-blue-700 rounded-lg border-opacity-10">
                 <div className="flex items-center space-x-6">
-                  <Image
-                    src={pics.jobimg}
-                    alt={job.title}
-                    width={50}
-                    height={50}
-                  />
+                 <img src={job.image} width={50} height={50} />
                   <div className="ml-4">
                     <h1 className="text-[17px] font-semibold mb-[0.4rem]">
                       {job.title}

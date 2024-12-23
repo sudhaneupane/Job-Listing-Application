@@ -1,3 +1,4 @@
+import { v2 as cloudinary } from "cloudinary";
 import Jobs from "../models/jobDetails.model.js";
 
 const addJob = async (req, res) => {
@@ -26,6 +27,14 @@ const addJob = async (req, res) => {
       return res.status(400).json({ message: "All fields are required" });
     }
 
+    if (!req.file) {
+      return res.status(400).json({ message: "File upload is required" });
+    }
+
+    const imageUrl = await cloudinary.uploader.upload(req.file.path, {
+      resource_type:"image"
+    });
+
     const created = await Jobs.create({
       title,
       description,
@@ -35,6 +44,7 @@ const addJob = async (req, res) => {
       requirement,
       jobType,
       skills,
+      image: imageUrl.secure_url,
     });
 
     if (!created) {

@@ -37,6 +37,10 @@ const jobDetailSchema = new mongoose.Schema({
     type: [String],
     required: true,
   },
+  image: {
+    type: String,
+    required: false,
+  },
 });
 
 const Jobs = mongoose.models.Jobs || mongoose.model("Jobs", jobDetailSchema);

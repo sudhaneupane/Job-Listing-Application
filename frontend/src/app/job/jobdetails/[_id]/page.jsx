@@ -25,7 +25,13 @@ const JobDetails = ({ params }) => {
     <div className="mt-20 mb-12">
       <div className="block sm:flex items-center justify-between w-[80%] mx-auto">
         <div className="flex-[0.7] ">
-          <div className="flex justify-between items-center w-full">
+          <div className="flex justify-between items-center w-full space-x-8">
+            <img
+              src={job ? job.image : "/default-image.jpg"} 
+              alt="Job"
+              className="w-16 h-16 object-cover rounded-lg"
+            />
+            
             <h1 className="text-[30px] font-extrabold text-blue-600">
               {job ? job.title : "Loading..."}
             </h1>
