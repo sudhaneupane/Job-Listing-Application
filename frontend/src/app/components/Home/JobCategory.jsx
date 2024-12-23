@@ -90,7 +90,7 @@ const JobCategory = () => {
           career!
         </p>
         <div className="mt-12 w-[80%] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {dummyjob.map((job) => {
+          {dummyjob.slice(0, 4).map((job) => {
             return (
               <Link href={`/job/jobdetails/${job.jobId}`} key={job.jobId}>
                 {/* jobcard */}
@@ -141,6 +141,13 @@ const JobCategory = () => {
           })}
         </div>
       </div>
+      <Link href="/job/alljobs">
+        <div className="text-center mt-[3rem]">
+          <button className=" px-8 py-4 font-semibold hover:bg-blue-700 transition-all duration-300 bg-blue-500 rounded-lg text-white">
+            View All Jobs
+          </button>
+        </div>
+      </Link>
     </div>
   );
 };
