@@ -2,7 +2,8 @@
 import React, { useState } from "react";
 
 const ApplyForm = () => {
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
     } catch (error) {}
   };
@@ -121,6 +122,7 @@ const ApplyForm = () => {
             <option value="Bachelor's Degree">Bachelor's Degree</option>
             <option value="Master's Degree">Master's Degree</option>
             <option value="PhD">PhD</option>
+            <option value="Others">Others</option>
           </select>
         </div>
 

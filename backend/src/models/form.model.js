@@ -30,6 +30,10 @@ const formSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    coverLetter: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );
