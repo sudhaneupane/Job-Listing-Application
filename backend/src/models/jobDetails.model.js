@@ -29,6 +29,10 @@ const jobDetailSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  postedDate: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const Jobs = mongoose.models.Jobs || mongoose.model("Jobs", jobDetailSchema);

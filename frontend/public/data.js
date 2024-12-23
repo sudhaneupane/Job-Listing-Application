@@ -1,5 +1,5 @@
 import jobimg from "./images/job.png";
-import hero_img from "./images/hero.jpg";
+import hero_img from "./images/hero.webp";
 
 export const pics = {
   jobimg,
