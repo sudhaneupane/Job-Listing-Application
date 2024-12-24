@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import { pics } from "../../../../public/data";
+import { pics } from "../../../public/data";
 import JobCategory from "./JobCategory";
 
 const Home = () => {
@@ -37,7 +37,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <JobCategory/>
+      <JobCategory />
     </div>
   );
 };

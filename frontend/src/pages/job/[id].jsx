@@ -1,10 +1,13 @@
 "use client";
 import axios from "axios";
+import { useRouter } from "next/router";
+
 import React, { useEffect, useState } from "react";
 export const dynamicParams = true;
-const JobDetails = ({ params }) => {
+const JobDetails = () => {
   const [job, setJob] = useState(null);
-  const { id } = React.use(params);
+  const router = useRouter();
+  const { id } = router.query; // Access the `id` parameter from the URL
 
   const specificJob = async () => {
     try {
