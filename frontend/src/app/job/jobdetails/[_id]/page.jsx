@@ -58,12 +58,18 @@ const JobDetails = ({ params }) => {
             <p className="mt-4 text-black text-opacity-70">
               {job ? job.description : "Loading.."}
             </p>
-            <h1 className="text-[20px] mt-8 font-semibold">
-              Key Responsibilities
-            </h1>
-            <p className="mt-4 text-black text-opacity-70">
-              {job ? job.responsibilities : "Loading.."}
-            </p>
+            <h1 className="text-[20px] mt-8 font-semibold">Key Responsibilities</h1>
+            <ul className=" list-disc mt-4">
+              {job ? (
+                job.responsibilities.map((responsibilities, index) => (
+                  <li className="mt-4 text-black text-opacity-70" key={index}>
+                    {responsibilities}
+                  </li>
+                ))
+              ) : (
+                <li>Loading...</li>
+              )}
+            </ul>
             <h1 className="text-[20px] mt-8 font-semibold">Company</h1>
             <p className="mt-4 text-black text-opacity-70">
               {job ? job.company : "Loading.."}

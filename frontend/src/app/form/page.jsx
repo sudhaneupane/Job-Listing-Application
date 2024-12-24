@@ -37,6 +37,14 @@ const ApplyForm = () => {
       );
       if (response.status === 201) {
         toast.success(response.data.message);
+        setCV("")
+        setCoverLetter("")
+        setEducation("")
+        setEmail("")
+        setExp("")
+        setFullname("")
+        setJobTitle("")
+        setPhone("")
       }
       // console.log(response.data.message);
     } catch (error) {
