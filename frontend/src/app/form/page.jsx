@@ -1,11 +1,42 @@
 "use client";
+import axios from "axios";
 import React, { useState } from "react";
 
 const ApplyForm = () => {
+  const [fullname, setFullname] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [cv, setCV] = useState("");
+  const [exp, setExp] = useState("");
+  const [education, setEducation] = useState("");
+  const [coverLetter, setCoverLetter] = useState("");
+  const [jobTitle, setJobTitle] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-    } catch (error) {}
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        `http://localhost:8000/api/form`,
+        {
+          fullname,
+          email,
+          phone,
+          cv,
+          exp,
+          education,
+          coverLetter,
+          jobTitle,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -22,6 +53,10 @@ const ApplyForm = () => {
             type="text"
             id="fullName"
             name="fullName"
+            value={fullname}
+            onChange={(e) => {
+              setFullname(e.target.value);
+            }}
             required
             className="mt-1 block w-full px-3 py-2 border border-blue-300 rounded-md shadow-sm    "
           />
@@ -38,6 +73,10 @@ const ApplyForm = () => {
             type="email"
             id="email"
             name="email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
             required
             className="mt-1 block w-full px-3 py-2 border border-blue-300 rounded-md shadow-sm"
           />
@@ -54,6 +93,10 @@ const ApplyForm = () => {
             type="text"
             id="phone"
             name="phone"
+            value={phone}
+            onChange={(e) => {
+              setPhone(e.target.value);
+            }}
             required
             className="mt-1 block w-full px-3 py-2 border border-blue-300 rounded-md shadow-sm"
           />
@@ -70,7 +113,10 @@ const ApplyForm = () => {
             type="text"
             id="position"
             name="position"
-            disabled
+            value={jobTitle}
+            onChange={(e) => {
+              setJobTitle(e.target.value);
+            }}
             className="mt-1 block w-full px-3 py-2 border border-blue-300 rounded-md shadow-sm"
           />
         </div>
@@ -86,6 +132,10 @@ const ApplyForm = () => {
             type="file"
             id="resume"
             name="resume"
+            value={cv}
+            onChange={(e) => {
+              setCV(e.target.value);
+            }}
             required
             className="mt-1 block w-full px-3 py-2 border border-blue-300 rounded-md shadow-sm"
           />
@@ -101,6 +151,10 @@ const ApplyForm = () => {
           <textarea
             id="coverLetter"
             name="coverLetter"
+            value={coverLetter}
+            onChange={(e) => {
+              setCoverLetter(e.target.value);
+            }}
             className="mt-1 block w-full px-3 py-2 border border-blue-300 rounded-md shadow-sm"
           />
         </div>
@@ -112,18 +166,16 @@ const ApplyForm = () => {
           >
             Highest Level of Education
           </label>
-          <select
+          <input
             id="education"
             name="education"
+            value={education}
+            onChange={(e) => {
+              setEducation(e.target.value);
+            }}
             required
             className="mt-1 block w-full px-3 py-2 border border-blue-300 rounded-md shadow-sm"
-          >
-            <option value="High School">High School</option>
-            <option value="Bachelor's Degree">Bachelor's Degree</option>
-            <option value="Master's Degree">Master's Degree</option>
-            <option value="PhD">PhD</option>
-            <option value="Others">Others</option>
-          </select>
+          ></input>
         </div>
 
         <div className="mb-4">
@@ -139,6 +191,10 @@ const ApplyForm = () => {
             name="experience"
             min="0"
             max="40"
+            value={exp}
+            onChange={(e) => {
+              setExp(e.target.value);
+            }}
             required
             className="mt-1 block w-full px-3 py-2 border border-blue-300 rounded-md shadow-sm"
           />

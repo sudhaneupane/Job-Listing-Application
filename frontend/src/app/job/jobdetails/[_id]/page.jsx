@@ -1,11 +1,13 @@
 "use client";
 import axios from "axios";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const JobDetails = ({ params }) => {
   const [job, setJob] = useState(null);
   const { _id } = React.use(params);
+  const router = useRouter();
+
   const specificJob = async () => {
     try {
       const response = await axios.get(`http://localhost:8000/api/jobs/${_id}`);
@@ -20,6 +22,15 @@ const JobDetails = ({ params }) => {
       specificJob();
     }
   }, [_id]);
+  
+  const handleRedirection = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.push("/login");
+    } else {
+      router.push("/form");
+    }
+  };
 
   return (
     <div className="mt-20 mb-12">
@@ -35,11 +46,12 @@ const JobDetails = ({ params }) => {
             <h1 className="text-[30px] font-extrabold text-blue-600">
               {job ? job.title : "Loading..."}
             </h1>
-            <Link href="/form">
-              <button className="bg-blue-500 mx-[-80] text-white px-8 py-4 rounded-lg shadow-md hover:bg-blue-700 transition-all">
-                Apply Now
-              </button>
-            </Link>
+            <button
+              onClick={handleRedirection}
+              className="bg-blue-500 mx-[-80] text-white px-8 py-4 rounded-lg shadow-md hover:bg-blue-700 transition-all"
+            >
+              Apply Now
+            </button>
           </div>
           <div className="mt-12 w-[80%] mx-auto">
             <h1 className="text-[20px] font-semibold">Job Description</h1>

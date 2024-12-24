@@ -2,9 +2,31 @@ import { Form } from "../models/form.model.js";
 
 export const createForm = async (req, res) => {
   try {
+    const { id } = req.user;
+
+    if (!id) {
+      return res.status(403).json({ success: false, message: "Unauthorized" });
+    }
+
     const { fullname, email, phone, jobTitle, education, exp, coverLetter } =
       req.body;
-    const cv = req.file ? req.file.path : null;
+
+    if (!req.file) {
+      return res.status(400).json({
+        success: false,
+        message: "CV file is required.",
+      });
+    }
+
+    const fileType = req.file.mimetype;
+    if (fileType !== "application/pdf") {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid file type. Only PDF files are allowed.",
+      });
+    }
+    const cv = req.file.path;
+
     if (
       !fullname ||
       !email ||
