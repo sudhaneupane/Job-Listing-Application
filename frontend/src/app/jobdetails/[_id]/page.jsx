@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
+export const dynamicParams = true;
 const JobDetails = ({ params }) => {
   const [job, setJob] = useState(null);
   const { _id } = React.use(params);
