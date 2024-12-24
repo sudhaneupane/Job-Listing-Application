@@ -1,6 +1,7 @@
 "use client";
 import axios from "axios";
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 
 const ApplyForm = () => {
   const [fullname, setFullname] = useState("");
@@ -15,27 +16,32 @@ const ApplyForm = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
+      const formData = new FormData();
+      formData.append("fullname", fullname);
+      formData.append("email", email);
+      formData.append("phone", phone);
+      formData.append("cv", cv);
+      formData.append("exp", exp);
+      formData.append("education", education);
+      formData.append("coverLetter", coverLetter);
+      formData.append("jobTitle", jobTitle);
+
       const response = await axios.post(
         `http://localhost:8000/api/form`,
-        {
-          fullname,
-          email,
-          phone,
-          cv,
-          exp,
-          education,
-          coverLetter,
-          jobTitle,
-        },
+        formData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      console.log(response.data);
+      if (response.status === 201) {
+        toast.success(response.data.message);
+      }
+      // console.log(response.data.message);
     } catch (error) {
-      console.log(error);
+      console.log("err", error);
+      toast.error(error.response.data.message)
     }
   };
 
@@ -132,9 +138,9 @@ const ApplyForm = () => {
             type="file"
             id="resume"
             name="resume"
-            value={cv}
+            accept=".pdf"
             onChange={(e) => {
-              setCV(e.target.value);
+              setCV(e.target.files[0]);
             }}
             required
             className="mt-1 block w-full px-3 py-2 border border-blue-300 rounded-md shadow-sm"
@@ -206,6 +212,7 @@ const ApplyForm = () => {
         >
           Apply Now
         </button>
+        <ToastContainer />
       </form>
     </div>
   );
