@@ -10,7 +10,9 @@ const JobCategory = () => {
 
   const handleJobs = async () => {
     try {
-      const response = await axios.get(`https://job-listing-application-m36c.onrender.com/api/jobs`);
+      const response = await axios.get(
+        `https://job-listing-application-m36c.onrender.com/api/jobs`
+      );
       setJob(response.data.viewJobs);
     } catch (error) {
       console.log(error);
@@ -36,8 +38,8 @@ const JobCategory = () => {
           {job.slice(0, 4).map((job, index) => {
             return (
               <Link
-                href={`/job/jobdetails/${job._id}`}
-                key={job._id || index}
+                href={`/job/jobdetails/${job._id.toString()}`}
+                key={job._id.toString() || index}
               >
                 {/* jobcard */}
                 <div className="p-4 mb-6 relative border-2 cursor-pointer hover:scale-110 hover:shadow-md transition-all duration-300 border-blue-700 rounded-lg border-opacity-10">

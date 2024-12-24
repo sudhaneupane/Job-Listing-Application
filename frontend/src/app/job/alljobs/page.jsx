@@ -2,10 +2,8 @@
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { pics } from "../../../../public/data";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { BiMoney } from "react-icons/bi";
-import Image from "next/image";
 
 const page = () => {
   const [job, setJob] = useState([]);
@@ -14,9 +12,12 @@ const page = () => {
 
   const allJobs = async (page = 1) => {
     try {
-      const response = await axios.get(`https://job-listing-application-m36c.onrender.com/api/jobs`, {
-        params: { page, limit: 5 },
-      });
+      const response = await axios.get(
+        `https://job-listing-application-m36c.onrender.com/api/jobs`,
+        {
+          params: { page, limit: 5 },
+        }
+      );
       setJob(response.data.viewJobs);
       setTotalPages(response.data.totalPages);
     } catch (error) {
@@ -40,7 +41,10 @@ const page = () => {
       <div className="space-y-8">
         {job.map((job, index) => {
           return (
-            <Link href={`/job/jobdetails/${job._id}`} key={job._id || index}>
+            <Link
+              href={`/job/jobdetails/${job._id.toString()}`}
+              key={job._id.toString() || index}
+            >
               <div className="p-4 mb-6 relative border-2 cursor-pointer hover:scale-110 hover:shadow-md transition-all duration-300 border-blue-700 rounded-lg border-opacity-10">
                 <div className="flex items-center space-x-6">
                   <img src={job.image} height={50} width={50} alt="" />
