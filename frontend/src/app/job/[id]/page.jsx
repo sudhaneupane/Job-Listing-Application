@@ -18,10 +18,10 @@ const JobDetails = ({ params }) => {
   };
 
   useEffect(() => {
-    if (_id) {
+    if (id) {
       specificJob();
     }
-  }, [_id]);
+  }, [id]);
 
   const handleRedirection = async () => {
     const token = localStorage.getItem("token");
