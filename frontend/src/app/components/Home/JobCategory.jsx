@@ -38,7 +38,7 @@ const JobCategory = () => {
           {job.slice(0, 4).map((job, index) => {
             return (
               <Link
-                href={`/jobdetails/${job._id.toString()}`}
+                href={`/job/${job._id.toString()}`}
                 key={job._id.toString() || index}
               >
                 {/* jobcard */}

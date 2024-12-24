@@ -42,7 +42,7 @@ const page = () => {
         {job.map((job, index) => {
           return (
             <Link
-              href={`/jobdetails/${job._id.toString()}`}
+              href={`job/${job._id.toString()}`}
               key={job._id.toString() || index}
             >
               <div className="p-4 mb-6 relative border-2 cursor-pointer hover:scale-110 hover:shadow-md transition-all duration-300 border-blue-700 rounded-lg border-opacity-10">
@@ -66,7 +66,6 @@ const page = () => {
                         <p className="text-[14px] text-black font-semibold text-opacity-60">
                           Rs.{job.salary}
                         </p>
-                        
                       </div>
                     </div>
                     <div className="flex items-center space-x-2 sm:space-x-4 mt-[1rem] flex-wrap">
