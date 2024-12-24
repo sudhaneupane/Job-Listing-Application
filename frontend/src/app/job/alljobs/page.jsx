@@ -66,6 +66,7 @@ const page = () => {
                         <p className="text-[14px] text-black font-semibold text-opacity-60">
                           Rs.{job.salary}
                         </p>
+                        
                       </div>
                     </div>
                     <div className="flex items-center space-x-2 sm:space-x-4 mt-[1rem] flex-wrap">

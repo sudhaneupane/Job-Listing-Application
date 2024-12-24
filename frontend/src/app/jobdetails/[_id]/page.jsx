@@ -1,16 +1,16 @@
 "use client";
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const JobDetails = ({ params }) => {
   const [job, setJob] = useState(null);
   const { _id } = React.use(params);
-  const router = useRouter();
 
   const specificJob = async () => {
     try {
-      const response = await axios.get(`https://job-listing-application-m36c.onrender.com/api/jobs/${_id}`);
+      const response = await axios.get(
+        `https://job-listing-application-m36c.onrender.com/api/jobs/${_id}`
+      );
       setJob(response.data.viewSpecific);
     } catch (error) {
       console.log("err", error);
@@ -22,7 +22,7 @@ const JobDetails = ({ params }) => {
       specificJob();
     }
   }, [_id]);
-  
+
   const handleRedirection = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -58,7 +58,9 @@ const JobDetails = ({ params }) => {
             <p className="mt-4 text-black text-opacity-70">
               {job ? job.description : "Loading.."}
             </p>
-            <h1 className="text-[20px] mt-8 font-semibold">Key Responsibilities</h1>
+            <h1 className="text-[20px] mt-8 font-semibold">
+              Key Responsibilities
+            </h1>
             <ul className=" list-disc mt-4">
               {job ? (
                 job.responsibilities.map((responsibilities, index) => (
