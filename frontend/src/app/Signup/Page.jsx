@@ -62,7 +62,7 @@ const SignUpPage = () => {
       const formData = { email, password, phone };
 
       const response = await axios.post(
-        `http://localhost:8000/api/signup`,
+        `https://job-listing-application-m36c.onrender.com/api/signup`,
         formData
       );
 

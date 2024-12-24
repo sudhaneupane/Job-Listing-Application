@@ -10,7 +10,7 @@ const JobDetails = ({ params }) => {
 
   const specificJob = async () => {
     try {
-      const response = await axios.get(`http://localhost:8000/api/jobs/${_id}`);
+      const response = await axios.get(`https://job-listing-application-m36c.onrender.com/api/jobs/${_id}`);
       setJob(response.data.viewSpecific);
     } catch (error) {
       console.log("err", error);

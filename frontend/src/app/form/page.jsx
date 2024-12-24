@@ -27,7 +27,7 @@ const ApplyForm = () => {
       formData.append("jobTitle", jobTitle);
 
       const response = await axios.post(
-        `http://localhost:8000/api/form`,
+        `https://job-listing-application-m36c.onrender.com/api/form`,
         formData,
         {
           headers: {

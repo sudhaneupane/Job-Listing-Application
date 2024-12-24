@@ -1,8 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { pics } from "../../../../public/data";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { BiMoney } from "react-icons/bi";
 import axios from "axios";
@@ -12,7 +10,7 @@ const JobCategory = () => {
 
   const handleJobs = async () => {
     try {
-      const response = await axios.get(`http://localhost:8000/api/jobs`);
+      const response = await axios.get(`https://job-listing-application-m36c.onrender.com/api/jobs`);
       setJob(response.data.viewJobs);
     } catch (error) {
       console.log(error);

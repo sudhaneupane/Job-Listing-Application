@@ -23,7 +23,7 @@ const Nav = () => {
   const handleLogout = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:8000/api/logout`,
+        `https://job-listing-application-m36c.onrender.com/api/logout`,
         {},
         {
           headers: {

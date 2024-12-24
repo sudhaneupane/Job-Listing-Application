@@ -14,7 +14,7 @@ const page = () => {
 
   const allJobs = async (page = 1) => {
     try {
-      const response = await axios.get(`http://localhost:8000/api/jobs`, {
+      const response = await axios.get(`https://job-listing-application-m36c.onrender.com/api/jobs`, {
         params: { page, limit: 5 },
       });
       setJob(response.data.viewJobs);
