@@ -46,7 +46,7 @@ const ApplyForm = () => {
         setJobTitle("")
         setPhone("")
       }
-      // console.log(response.data.message);
+      
     } catch (error) {
       console.log("err", error);
       toast.error(error.response.data.message)
