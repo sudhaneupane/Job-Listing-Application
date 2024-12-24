@@ -4,12 +4,12 @@ import React, { useEffect, useState } from "react";
 export const dynamicParams = true;
 const JobDetails = ({ params }) => {
   const [job, setJob] = useState(null);
-  const { _id } = React.use(params);
+  const { id } = React.use(params);
 
   const specificJob = async () => {
     try {
       const response = await axios.get(
-        `https://job-listing-application-m36c.onrender.com/api/jobs/${_id}`
+        `https://job-listing-application-m36c.onrender.com/api/jobs/${id}`
       );
       setJob(response.data.viewSpecific);
     } catch (error) {
